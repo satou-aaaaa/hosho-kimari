@@ -41,7 +41,7 @@ function resolve(P) {
     case "kyokudo": return /極度額）は決めなかった/.test(q) ? "効力がない" : /極度額）は\d/.test(q) ? "効力がある" : null;
     case "futari": return fmt(A[0] / 2);
     case "ninzu": return fmt(A[0] / num(q, /(\d)人が保証人/));
-    case "kensaku": return /連帯保証人/.test(q) ? "まず本人の財産から、とは言えない" : "まず本人の財産から取り立てる";
+    case "kensaku": return /連帯保証人/.test(q) ? "保証人から先に取り立ててよい" : "まず本人の財産から取り立てなければならない";
     case "kyusho": { const m = q.match(/代わりに(\d+万\d*円)を払い/); if (m) return fmt(yenOf(m[1])); const give = yenOf(q.match(/(\d+万\d*円)の値打ち/)[1]), debt = yenOf(q.match(/借金(\d+万\d*円)が全部/)[1]); return fmt(Math.min(give, debt)); }
     case "kazou": return `年${num(q, /利息は年(\d+)%/)}%のまま`;
     case "kakutei5": { const n = num(q, /契約の(\d+)年後/); return n <= 5 ? `${n}年後` : "3年後"; }
